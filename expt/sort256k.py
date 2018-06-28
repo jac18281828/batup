@@ -40,13 +40,14 @@ def writedict(outdat, datadict):
                 outdat.write(dat[0])
 
                 length = len(dat[1])
+                print length
                 outdat.write(struct.pack('H', length))
                 try:
-                    outdat.write(struct.pack('%sH' % len(dat[1]), *dat[1]))
+                    outdat.write(struct.pack('%sH' % length, *dat[1]))
                 except (struct.error):                    
                     print dat[1]
 
-with open('../doc/ebat.csv', 'r') as batdat:
+with open('../data/ebat.csv', 'r') as batdat:
     with open('out.batz', 'wb') as outdat:
         buffer = batdat.read(PAGE)
         while buffer:
