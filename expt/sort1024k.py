@@ -7,7 +7,6 @@ PAGE = 1024*1024
 ##
 
 def compress(page):
-
     data = []
 
     pagedata = struct.unpack('%sI' % (len(page)/4), page[:len(page)/4*4])

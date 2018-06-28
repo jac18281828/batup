@@ -1,0 +1,10 @@
+monday 8am -10am roughed out the concept of sorted lists
+wed    6pm-8pm   tried a few optimizations, write the generator script
+
+- need to write the python decoder
+- port to C++
+- build
+- test
+- documentation
+
+thu 3pm -  work on decoding and c++ setup

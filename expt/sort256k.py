@@ -1,19 +1,25 @@
 import struct
 
-PAGE = 256*1024
+from mergecommon import mergecommonsubseq
 
-##
-## Must handle dangling bytes!
-##
+PAGE = 256*1024
+SEQSIZE = 4
 
 def compress(page):
 
     data = []
 
-    pagedata = struct.unpack('%sI' % (len(page)/4), page[:len(page)/4*4])
+    pagelen = len(page)
 
+    pagedata = [ page[i:min(i+SEQSIZE,pagelen)] for i in range(0, pagelen, SEQSIZE)]
+
+    # 10% larger file
+    #pagedata = mergecommonsubseq(pagedata)
+
+    offset = 0
     for i in range(len(pagedata)):
-        data.append((pagedata[i], i))
+        data.append((pagedata[i], offset/4))
+        offset += len(pagedata[i])
 
     data = sorted(data, key=lambda x: x[0])
 
@@ -29,18 +35,21 @@ def compress(page):
 
     return datadict
 
+def writedict(outdat, datadict):
+            for dat in datadict:
+                outdat.write(dat[0])
+
+                length = len(dat[1])
+                outdat.write(struct.pack('H', length))
+                try:
+                    outdat.write(struct.pack('%sH' % len(dat[1]), *dat[1]))
+                except (struct.error):                    
+                    print dat[1]
+
 with open('../doc/ebat.csv', 'r') as batdat:
     with open('out.batz', 'wb') as outdat:
         buffer = batdat.read(PAGE)
         while buffer:
             datadict = compress(buffer)
-
-            for dat in datadict:
-                outdat.write(struct.pack('I', dat[0]))
-
-                length = len(dat[1])
-                outdat.write(struct.pack('H', length))                                                
-                outdat.write(struct.pack('%sH' % len(dat[1]), *dat[1]))
-            
+            writedict(outdat, datadict)
             buffer = batdat.read(PAGE)
-
