@@ -15,9 +15,14 @@ batup: [parameters] file
 
 `batup` exploits the idea that redundant words of data appear in most data. `batup` organizes data into 256kb pages and splits the data along 32bit word boundaries.  Then `batup` indexes each word into a range of 16bit position offsets.  This 'indexing' results in data savings as each words position in the page is represented by only 16 bits of data rather than 32.
 
-# performance
+# compression metrics
 
-`batup` is capable of throughput around 25Mb/s on 10 year old hardware.   This is fairly high compared with more sophisticated compression algorithms such as Zip which are up to a factor of 2 or more slower.
+| description | file | original size | batup size | batup time | gzip size | gzip time |
+__________________________________________________________________________
+| compression | ebat.csv | 17M | 12M | 1.77s | 3M | .7s |
+| compression | bigebat.csv | 1.1G | 944M | 3m6.5s | 411M | 1m9.7s |
+| decompression | ebat.csv.batz | 17M | 12M | .9s | 3M | .128s |
+| decompression | bigebat.csv.batz | 1.1G | 944M | 1m44.6s | 411M | 10.4s |
 
 # getting started
 
