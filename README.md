@@ -17,12 +17,12 @@ batup: [parameters] file
 
 # compression metrics
 
-| description | file | original size | batup size | batup time | gzip size | gzip time |
-|:------------:|:---------:|:-----:|:-----:|:------:|:------:|:-----:|:-----:|
-| compression | ebat.csv | 17M | 12M | 1.77s | 3M | .7s |
-| compression | bigebat.csv | 1.1G | 944M | 3m6.5s | 411M | 1m9.7s |
-| decompression | ebat.csv.batz | 17M | 12M | .9s | 3M | .128s |
-| decompression | bigebat.csv.batz | 1.1G | 944M | 1m44.6s | 411M | 10.4s |
+| description  | file      | original size | batup size | batup time | gzip size | gzip time |
+|:------------:|:---------:|:-------------:|:----------:|:----------:|:---------:|:---------:|
+| compression  | ebat.csv  | 17M           | 12M        | 1.77s      | 3M        | .7s       |
+| compression  | bigebat.csv | 1.1G        | 944M       | 3m6.5s     | 411M      | 1m9.7s    |
+| decompression | ebat.csv.batz | 17M      | 12M        | .9s        | 3M        | .128s     |
+| decompression | bigebat.csv.batz | 1.1G  | 944M       | 1m44.6s    | 411M      | 10.4s     |
 
 # getting started
 
